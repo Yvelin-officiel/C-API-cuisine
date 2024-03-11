@@ -24,9 +24,9 @@ client.connect(err => {
 
 //  ROUTES
 
-app.post('/ajouter', async (req, res) => {
+app.post('/ajouter/user', async (req, res) => {
   try {
-    const collection = client.db("test").collection("documents");
+    const collection = client.db("test").collection("users");
     const result = await collection.insertOne(req.body);
     res.status(201).send(result);
   } catch (error) {
@@ -34,9 +34,49 @@ app.post('/ajouter', async (req, res) => {
   }
 });
 
-app.get('/lire', async (req, res) => {
+app.get('/lire/user', async (req, res) => {
   try {
-    const collection = client.db("test").collection("documents");
+    const collection = client.db("test").collection("users");
+    const result = await collection.find({}).toArray();
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.post('/ajouter/recipe', async (req, res) => {
+  try {
+    const collection = client.db("test").collection("recipes");
+    const result = await collection.insertOne(req.body);
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.get('/lire/recipe', async (req, res) => {
+  try {
+    const collection = client.db("test").collection("recipes");
+    const result = await collection.find({}).toArray();
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.post('/ajouter/comment', async (req, res) => {
+  try {
+    const collection = client.db("test").collection("comments");
+    const result = await collection.insertOne(req.body);
+    res.status(201).send(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.get('/lire/comment', async (req, res) => {
+  try {
+    const collection = client.db("test").collection("comments");
     const result = await collection.find({}).toArray();
     res.status(200).send(result);
   } catch (error) {
