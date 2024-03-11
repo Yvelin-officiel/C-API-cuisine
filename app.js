@@ -1,5 +1,6 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const ENV = require('./environment/environment');
 
 const app = express();
 app.use(express.json());
@@ -9,7 +10,7 @@ app.listen(port, () => {
   console.log(`Serveur lancé sur http://localhost:${port}`);
 });
 
-const uri = "mongodb+srv://monAppMongoDB:36EfP42PA5OIikiL@monappmongodb.svepwii.mongodb.net/";
+const uri = env.uri;
 const client = new MongoClient(uri);
 
 client.connect(err => {
