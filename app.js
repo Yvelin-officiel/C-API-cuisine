@@ -1,5 +1,6 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+
 
 const app = express();
 app.use(express.json());
@@ -10,12 +11,9 @@ app.listen(port, () => {
 });
 
 const uri = "mongodb+srv://monAppMongoDB:36EfP42PA5OIikiL@monappmongodb.svepwii.mongodb.net/";
-const client = new MongoClient(uri);
 
-client.connect(err => {
-  if (err) {
-    console.error('Erreur de connexion à MongoDB', err);
-    process.exit(1);
-  }
-  console.log('Connecté à la base de données MongoDB');
+mongoose.connect(uri).then(() => {
+  console.log('Connected to MongoDB with Success !');
+}).catch((err) => {
+  console.log('MongoDB ERROR', err);
 });
